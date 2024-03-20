@@ -1,27 +1,37 @@
+
+
 const passwordBox = document.getElementById("password");
-const length = 12;
+const passwordLength = 12;
 
-const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-const number = "0123456789";
-const symbol = "@#$%^&*()_+/*-[]{}|";
+const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+const numberChars = "0123456789";
+const symbolChars = "@#$%^&*()_+/*-[]{}|";
+const allChars = upperCaseChars + lowerCaseChars + numberChars + symbolChars;
 
-const allChars = upperCase + lowerCase + number + symbol;
-
-function createPassword(){
+function createPassword() {
     let password = "";
-    password += upperCase[Math.floor(Math.random() * upperCase.length)];
-    password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
-    password += number[Math.floor(Math.random() * number.length)];
-    password += symbol[Math.floor(Math.random() * symbol.length)];
+    password += upperCaseChars[Math.floor(Math.random() * upperCaseChars.length)];
+    password += lowerCaseChars[Math.floor(Math.random() * lowerCaseChars.length)];
+    password += numberChars[Math.floor(Math.random() * numberChars.length)];
+    password += symbolChars[Math.floor(Math.random() * symbolChars.length)];
 
-    while (length > password.length) {
-        password += symbol[Math.floor(Math.random() * allChars.length)];
-
+    while (password.length < passwordLength) {
+        password += allChars[Math.floor(Math.random() * allChars.length)];
     }
     passwordBox.value = password;
 }
 
+// function copyPassword() {
+//     passwordBox.select();
+//     navigator.clipboard.writeText(passwordBox.value)
+//         .then(() => {
+//             console.log('Password copied to clipboard');
+//         })
+//         .catch(err => {
+//             console.error('Unable to copy password to clipboard: ', err);
+//         });
+// }
 function copyPassword(){
     passwordBox.select();
     document.execCommand("copy");
